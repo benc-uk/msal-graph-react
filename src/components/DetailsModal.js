@@ -1,9 +1,8 @@
 import React from 'react'
 
-
 export default class DetailsModal extends React.Component {
   render() {
-    return <div className={`banner ${this.props.content ? 'modal is-active' : 'modal'}`}>
+    return <div className={`banner ${this.props.active ? 'modal is-active' : 'modal'}`}>
       <div className="modal-background"></div>
       <div className="modal-content" style={{ width: '80%' }}>
 

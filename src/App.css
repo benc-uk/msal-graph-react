@@ -58,6 +58,7 @@
 .main {
   padding: 0.5rem;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .col {
@@ -69,4 +70,12 @@
 
 .underline {
   border-bottom: 3px solid #bbb;
+}
+
+.fullwidth {
+  flex: 0 0 100%;
+}
+
+.centered {
+  text-align: center;
 }

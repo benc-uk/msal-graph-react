@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { login } from '../helpers/auth'
+import { auth } from '../index'
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -14,9 +14,9 @@ export default class Login extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div className="col centered">
       <h1 className="title is-5">Please login with Microsoft Identity Platform</h1>
-      <button className="button is-dark is-large" onClick={this.startLogin}>Sign in with Microsoft &nbsp; <img src="/mssymbol_19.svg"/></button>
+      <button className="button is-dark is-large" onClick={this.startLogin}>Sign in with Microsoft &nbsp; <img src="/mssymbol_19.svg" alt="MS logo"/></button>
       <p className="mt-4">Note. You can login with a 'work &amp; school' or personal Microsoft account</p>
       {(this.state.error) &&
         <div className="notification is-warning mt-4">
@@ -28,7 +28,7 @@ export default class Login extends React.Component {
 
   async startLogin() {
     try {
-      await login()
+      await auth.login()
       this.props.onLogin()
     } catch (err) {
       this.setState({ error: err.toString() })
