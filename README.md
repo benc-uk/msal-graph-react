@@ -33,6 +33,13 @@ Make a note of the GUID returned, this is the app ID, or client ID
 
 Copy `.env.local.sample` to `.env.local` and place the app ID in the setting `REACT_APP_CLIENT_ID`
 
+### Config Env Variables
+ - `REACT_APP_CLIENT_ID` - ***Required.*** To be set as described above
+ - `REACT_APP_AUTHORITY` - *Optional.* Only set if you want to use B2C or auth against a specific tenant
+ - `REACT_APP_VALIDATE_AUTHORITY` - *Optional.* Boolean true/false, default is true
+ - `REACT_APP_LOGIN_SCOPES` - *Optional.* Customize the scopes requested at login (idToken)
+ - `REACT_APP_TOKEN_SCOPES` - *Optional.* Customize the scopes requested for accessToken
+
 ### Docker
 There is a Dockerfile to build the app and serve it via NGINX. The Azure AD client ID needs to be set at build time (as this is a React app)
 

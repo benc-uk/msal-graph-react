@@ -1,3 +1,10 @@
+// ----------------------------------------------------------------------------
+// Copyright (c) Ben Coleman, 2020
+// Licensed under the MIT License.
+//
+// Login page
+// ----------------------------------------------------------------------------
+
 import React from 'react'
 
 import { auth } from '../index'
@@ -28,7 +35,10 @@ export default class Login extends React.Component {
 
   async startLogin() {
     try {
+      // Call the MSAL auth helper to login
       await auth.login()
+
+      // Callback to parent component when login is completed
       this.props.onLogin()
     } catch (err) {
       this.setState({ error: err.toString() })

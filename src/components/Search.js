@@ -1,3 +1,10 @@
+// ----------------------------------------------------------------------------
+// Copyright (c) Ben Coleman, 2020
+// Licensed under the MIT License.
+//
+// React component for doing a directory search using the Graph API
+// ----------------------------------------------------------------------------
+
 import React from 'react'
 import * as graph from '../helpers/graph'
 import { auth } from '../index'
@@ -37,6 +44,12 @@ export default class Search extends React.Component {
   }, 300);
 
   render() {
+    // You can't search the graph when signed in with a personal accounts
+    // All personally accounts reside in this special tenant
+    if (auth.user().idToken.tid === '9188040d-6c67-4c5b-b112-36a304b66dad') {
+      return <div className="notification is-light mt-4">Directory search not supported for personal accounts, sorry!</div>
+    }
+
     // Convert results array into JSX renderable table rows
     let userList = []
     for (let user of this.state.results) {
@@ -56,7 +69,7 @@ export default class Search extends React.Component {
           {userList}
         </tbody>
       </table>}
-      {this.state.error && <div className="notification is-danger mt-4">⚠ {this.state.error}</div>}
+      {this.state.error && <div className="notification is-danger mt-4"><span role="img" aria-label="warning-symbol">⚠</span> {this.state.error}</div>}
     </div>
   }
 }

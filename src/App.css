@@ -79,3 +79,10 @@
 .centered {
   text-align: center;
 }
+
+.gitlink, .gitlink a:visited {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  color: #333436;
+}

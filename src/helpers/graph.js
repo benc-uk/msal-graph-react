@@ -1,3 +1,10 @@
+// ----------------------------------------------------------------------------
+// Copyright (c) Ben Coleman, 2020
+// Licensed under the MIT License.
+//
+// Set of methods to call the Graph API, using REST and fetch
+// ----------------------------------------------------------------------------
+
 const GRAPH_BASE = 'https://graph.microsoft.com/beta'
 
 //
