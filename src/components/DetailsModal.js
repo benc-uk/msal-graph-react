@@ -8,7 +8,11 @@ export default class DetailsModal extends React.Component {
 
         <div className="notification is-info is-light">
           <button className="delete" onClick={() => this.props.onClose()}></button>
+
           <h5 className="title is-5">{this.props.title}</h5>
+
+          {this.props.link && <a className="button is-primary" rel="noopener noreferrer" target="_blank" href={this.props.link}>{this.props.link}</a>}
+
           <pre style={typeof this.props.content != 'object' ? { whiteSpace: 'pre-wrap', wordWrap:'break-word' } : {}}>
             {typeof this.props.content == 'object' ? JSON.stringify(this.props.content, null, 2) : this.props.content}
           </pre>

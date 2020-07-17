@@ -38,7 +38,7 @@ export async function getPhoto(accessToken) {
 //
 export async function searchUsers(searchString, accessToken) {
   let searchResp = await fetch(
-    `${GRAPH_BASE}/users?$filter=startswith(displayName, '${searchString}') or startswith(userPrincipalName, '${searchString}')`,
+    `${GRAPH_BASE}/users?$filter=startswith(displayName, '${searchString}') or startswith(userPrincipalName, '${searchString}')&$top=50`,
     {
       headers: { authorization: `bearer ${accessToken}` }
     }

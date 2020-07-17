@@ -34,10 +34,10 @@ export default class App extends React.Component {
 
   render() {
     return <div>
-      <section className="hero is-dark is-bold">
+      <section className="hero is-primary is-bold">
         <div className="hero-body">
           <h1 className="title">
-            <img src="logo.png" alt="logo" className="ml-4"/>MSAL and Microsoft Graph Demo
+            <img src="img/logo.svg" alt="logo" className="ml-4"/>MSAL and Microsoft Graph Demo
           </h1>
         </div>
       </section>
@@ -109,6 +109,7 @@ export default class App extends React.Component {
             title="Access Token Value"
             content={auth.getAccessToken()}
             active={this.state.showToken}
+            link="https://jwt.ms"
             onClose={() => this.setState({ showToken: false })}/>
 
           <DetailsModal
