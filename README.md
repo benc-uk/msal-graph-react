@@ -17,7 +17,7 @@ The use of a registered *multi-tenant application* and the v2 Azure AD 'common' 
 
 Note. The MSAL library is used directly rather than 'react-aad-msal' wrapper, as there's enough layers of abstraction to deal with as it is, without one more
 
-# Set Up
+# Set Up & Deployment
 
 ### Pre-reqs - Register app in Azure AD
 
@@ -29,9 +29,17 @@ az ad app create --display-name="Graph Demo App" \
 --available-to-other-tenants=true \
 --query "appId" -o tsv
 ```
-Make a note of the GUID returned, this is the app ID
+Make a note of the GUID returned, this is the app ID, or client ID
 
 Copy `.env.local.sample` to `.env.local` and place the app ID in the setting `REACT_APP_CLIENT_ID`
+
+### Docker
+There is a Dockerfile to build the app and serve it via NGINX. The Azure AD client ID needs to be set at build time (as this is a React app)
+
+Run from root of project, and set CLIENT_ID and image tag as required
+```bash
+docker build . -f deploy/Dockerfile --build-arg CLIENT_ID="CHANGE_ME" -t msal-graph-react
+```
 
 # Local Dev
 

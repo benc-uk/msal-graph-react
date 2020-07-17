@@ -16,7 +16,7 @@ export default class Login extends React.Component {
   render() {
     return <div className="col centered">
       <h1 className="title is-5">Please login with Microsoft Identity Platform</h1>
-      <button className="button is-dark is-large" onClick={this.startLogin}>Sign in with Microsoft &nbsp; <img src="/mssymbol_19.svg" alt="MS logo"/></button>
+      <button className="button is-dark is-large" onClick={this.startLogin}>Sign in with Microsoft &nbsp; <img src="img/mssymbol.svg" alt="MS logo"/></button>
       <p className="mt-4">Note. You can login with a 'work &amp; school' or personal Microsoft account</p>
       {(this.state.error) &&
         <div className="notification is-warning mt-4">
