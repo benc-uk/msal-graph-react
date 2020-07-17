@@ -1,9 +1,9 @@
 {
   "short_name": "MSAL React Demo",
-  "name": "MSAL React Demo",
+  "name": "MSAL & Microsoft Graph - React Sample",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "img/logo.png",
       "type": "image/png",
       "sizes": "290x290"
     }
