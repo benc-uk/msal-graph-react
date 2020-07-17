@@ -9,7 +9,7 @@ The app provides demonstration of some fundamental use cases:
 - Calling the Microsoft Graph API
 - Searching the Microsoft Graph with OData
 
-![](https://user-images.githubusercontent.com/14982936/87725299-eea43100-c7b4-11ea-8b60-884d8b292cef.png)
+![screen shot](https://user-images.githubusercontent.com/14982936/87789050-4931a180-c836-11ea-8c97-16b1c7e19895.png)
 
 This app only uses `User.Read` and `User.ReadBasic.All` permissions in the Graph, so does not require admin consent  
 
