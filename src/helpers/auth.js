@@ -1,14 +1,21 @@
+// ----------------------------------------------------------------------------
+// Copyright (c) Ben Coleman, 2020
+// Licensed under the MIT License.
+//
+// Generic reusable MSAL authentication helper for MSAL.js v1
+// ----------------------------------------------------------------------------
+
 import * as Msal from 'msal'
 
 // Modify if required
 const loginRequest = {
-  scopes: [ 'user.read' ],
+  scopes: JSON.parse(process.env.REACT_APP_LOGIN_SCOPES || null) || [ 'user.read', 'openid', 'profile' ],
   prompt: 'select_account'
 }
 
 // Modify if required
 const accessTokenRequest = {
-  scopes: [ 'user.read', 'user.readbasic.all' ]
+  scopes: JSON.parse(process.env.REACT_APP_TOKEN_SCOPES || null) || [ 'user.read', 'user.readbasic.all' ]
 }
 
 export class AuthHelper {
@@ -18,14 +25,18 @@ export class AuthHelper {
   constructor(clientId) {
     this.clientId = clientId
     this.accessToken = null
-    this.msalApp = new Msal.UserAgentApplication({
+    let config = {
       auth: {
-        clientId
+        clientId,
+        authority: process.env.REACT_APP_AUTHORITY || 'https://login.microsoftonline.com/common/',
+        validateAuthority: process.env.REACT_APP_VALIDATE_AUTHORITY === 'false' ? false : true
       },
       cache: {
         cacheLocation: 'localStorage'
       }
-    })
+    }
+    console.log('### MSAL UserAgentApplication config is\n', config)
+    this.msalApp = new Msal.UserAgentApplication(config)
   }
 
   //
