@@ -70,6 +70,12 @@ export default class App extends React.Component {
         <p><b>UPN:</b> { this.state.graphDetails.userPrincipalName }</p>
         <p><b>Mobile:</b> { this.state.graphDetails.mobilePhone }</p>
         <p><b>Department:</b> { this.state.graphDetails.department }</p>
+        <button className="button is-success is-fullwidth mt-2" onClick={() => this.setState({ showGraphDetails: true })}>
+          <span className="icon">
+            <i className="fas fa-address-card fa-fw"></i>
+          </span>
+          <span>Full Graph Result</span>
+        </button>
       </div>
     }
 
@@ -103,25 +109,25 @@ export default class App extends React.Component {
             </span>
             <span>Access Token</span>
           </button>
-          <button className="button is-success is-fullwidth mt-2" onClick={() => this.setState({ showGraphDetails: true })}>
-            <span className="icon">
-              <i className="fas fa-address-card fa-fw"></i>
-            </span>
-            <span>Graph Details</span>
-          </button>
-          <hr/>
-          <button className="button is-warning mr-2" onClick={() => auth.logout(false)}>
-            <span className="icon">
-              <i className="fas fa-sign-out-alt fa-fw"></i>
-            </span>
-            <span>Logout (Local)</span>
-          </button>
-          <button className="button is-warning" onClick={() => auth.logout(true)}>
-            <span className="icon">
-              <i className="fas fa-sign-out-alt fa-fw"></i>
-            </span>
-            <span>Logout</span>
-          </button>
+
+          <div className="columns mt-2">
+            <div className="column">
+              <button className="button is-warning is-fullwidth" onClick={() => auth.logout(false)}>
+                <span className="icon">
+                  <i className="fas fa-sign-out-alt fa-fw"></i>
+                </span>
+                <span>Logout (Local)</span>
+              </button>
+            </div>
+            <div className="column">
+              <button className="button is-warning is-fullwidth" onClick={() => auth.logout(true)}>
+                <span className="icon">
+                  <i className="fas fa-sign-out-alt fa-fw"></i>
+                </span>
+                <span>Logout (Full)</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         {graphDetails}
