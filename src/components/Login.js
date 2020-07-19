@@ -7,7 +7,7 @@
 
 import React from 'react'
 
-import { auth } from '../index'
+//import { auth } from '../index'
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -17,13 +17,13 @@ export default class Login extends React.Component {
       error: null
     }
 
-    this.startLogin = this.startLogin.bind(this)
+    this.doLogin = this.doLogin.bind(this)
   }
 
   render() {
     return <div className="col centered">
       <h1 className="title is-5">Please login with Microsoft Identity Platform</h1>
-      <button className="button is-dark is-large" onClick={this.startLogin}>Sign in with Microsoft &nbsp; <img src="img/mssymbol.svg" alt="MS logo"/></button>
+      <button className="button is-dark is-large" onClick={this.doLogin}>Sign in with Microsoft &nbsp; <img src="img/mssymbol.svg" alt="MS logo"/></button>
       <p className="mt-4">Note. You can login with a 'work &amp; school' or personal Microsoft account</p>
       {(this.state.error) &&
         <div className="notification is-warning mt-4">
@@ -33,10 +33,10 @@ export default class Login extends React.Component {
     </div>
   }
 
-  async startLogin() {
+  async doLogin() {
     try {
       // Call the MSAL auth helper to login
-      await auth.login()
+      await this.props.authHelper.login()
 
       // Callback to parent component when login is completed
       this.props.onLogin()

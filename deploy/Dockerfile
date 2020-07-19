@@ -26,7 +26,7 @@ FROM nginx:mainline-alpine
 
 COPY deploy/default.conf /etc/nginx/conf.d/
 
-# Copy in output from React bundle (the dist)
+# Copy in output from React bundle (the 'build' directory)
 COPY --from=bundle /build/build /var/www/html
 
 EXPOSE 80

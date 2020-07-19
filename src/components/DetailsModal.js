@@ -18,7 +18,7 @@ export default class DetailsModal extends React.Component {
     let preContent = typeof this.props.content == 'object' ? JSON.stringify(this.props.content, null, 2) : this.props.content
 
     return <div className={`banner ${this.props.active ? 'modal is-active' : 'modal'}`}>
-      <div className="modal-background"></div>
+      <div className="modal-background" onClick={() => this.props.onClose()}></div>
       <div className="modal-content" style={{ width: '80%' }}>
 
         <div className="notification is-info is-light">
@@ -31,7 +31,6 @@ export default class DetailsModal extends React.Component {
           </pre>
         </div>
       </div>
-      <button className="modal-close is-large" aria-label="close" onClick={() => this.props.onClose()}></button>
     </div>
   }
 }

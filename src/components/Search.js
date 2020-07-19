@@ -7,7 +7,7 @@
 
 import React from 'react'
 import * as graph from '../helpers/graph'
-import { auth } from '../index'
+//import { auth } from '../index'
 
 //
 // Search component allows for searching for users via MS Graph
@@ -35,7 +35,7 @@ export default class Search extends React.Component {
   search = debounce(async (text) => {
     if (text) {
       try {
-        let data = await graph.searchUsers(this.state.searchTerm, auth.getAccessToken())
+        let data = await graph.searchUsers(this.state.searchTerm, this.props.accessToken)
         this.setState({ results: data.value })
       } catch (err) {
         this.setState({ error: err.toString() })
@@ -46,7 +46,7 @@ export default class Search extends React.Component {
   render() {
     // You can't search the graph when signed in with a personal accounts
     // All personally accounts reside in this special tenant
-    if (auth.user().idToken.tid === '9188040d-6c67-4c5b-b112-36a304b66dad') {
+    if (this.props.user.idToken.tid === '9188040d-6c67-4c5b-b112-36a304b66dad') {
       return <div className="notification is-light mt-4">Directory search not supported for personal accounts, sorry!</div>
     }
 
