@@ -7,7 +7,7 @@
 
 import React from 'react'
 
-//import { auth } from '../index'
+import auth from '../services/auth'
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ export default class Login extends React.Component {
   async doLogin() {
     try {
       // Call the MSAL auth helper to login
-      await this.props.authHelper.login()
+      await auth.login()
 
       // Callback to parent component when login is completed
       this.props.onLogin()

@@ -10,8 +10,8 @@ import './App.css'
 import Login from './components/Login'
 import Search from './components/Search'
 import DetailsModal from './components/DetailsModal'
-import * as graph from './helpers/graph'
-import { AuthHelper } from './helpers/auth'
+import graph from './services/graph'
+import auth from './services/auth'
 
 export default class App extends React.Component {
 
@@ -19,7 +19,7 @@ export default class App extends React.Component {
     super(props)
 
     if (process.env.REACT_APP_CLIENT_ID) {
-      this.auth = new AuthHelper(process.env.REACT_APP_CLIENT_ID)
+      auth.configure(process.env.REACT_APP_CLIENT_ID)
     } else {
       alert('REACT_APP_CLIENT_ID is not set, app cannot function at all!')
       return
@@ -46,7 +46,7 @@ export default class App extends React.Component {
   //
   componentDidMount() {
     // Restore any cached or saved local user
-    this.setState({ user: this.auth.getAccount() })
+    this.setState({ user: auth.user() })
     this.callGraph()
   }
 
@@ -54,7 +54,7 @@ export default class App extends React.Component {
   // Callback to update state after login
   //
   loginComplete() {
-    this.setState({ user: this.auth.getAccount() })
+    this.setState({ user: auth.user() })
     this.callGraph()
   }
 
@@ -68,7 +68,7 @@ export default class App extends React.Component {
       graphDetails: null,
       graphPhoto: null
     })
-    this.auth.clearLocalUser()
+    auth.clearLocal()
   }
 
   //
@@ -76,19 +76,9 @@ export default class App extends React.Component {
   //
   async callGraph() {
     try {
-      // First try to get a token
-      const scopes = JSON.parse(process.env.VUE_APP_TOKEN_SCOPES || null) || [ 'user.read', 'user.readbasic.all' ]
-      let token = await this.auth.acquireToken(scopes)
-      this.setState({ accessToken: token })
-
-      // If it went wrong
-      if (!this.state.accessToken) { return }
-
-      // Fetch user details from Graph with our token
-      const graphDetails = await graph.getSelf(this.state.accessToken)
-      this.setState({ graphDetails })
-      const graphPhoto = await graph.getPhoto(this.state.accessToken)
-      this.setState({ graphPhoto })
+      this.setState({ graphDetails:await graph.getSelf() })
+      this.setState({ graphPhoto: await graph.getPhoto() })
+      this.setState({ accessToken: await graph.getAccessToken() })
     } catch (err) {
       this.setState({ error: err.toString() })
     }
@@ -118,7 +108,7 @@ export default class App extends React.Component {
         {appHeader}
 
         <div className="container main">
-          <Login onLogin={this.loginComplete} authHelper={this.auth}/>
+          <Login onLogin={this.loginComplete} />
         </div>
       </div>
     }
@@ -186,7 +176,7 @@ export default class App extends React.Component {
               </button>
             </div>
             <div className="column">
-              <button className="button is-warning is-fullwidth" onClick={() => this.auth.logout(true)}>
+              <button className="button is-warning is-fullwidth" onClick={() => auth.logout()}>
                 <span className="icon">
                   <i className="fas fa-door-open fa-fw"></i>
                 </span>

@@ -6,8 +6,7 @@
 // ----------------------------------------------------------------------------
 
 import React from 'react'
-import * as graph from '../helpers/graph'
-//import { auth } from '../index'
+import graph from '../services/graph'
 
 //
 // Search component allows for searching for users via MS Graph
@@ -35,7 +34,7 @@ export default class Search extends React.Component {
   search = debounce(async (text) => {
     if (text) {
       try {
-        let data = await graph.searchUsers(this.state.searchTerm, this.props.accessToken)
+        let data = await graph.searchUsers(this.state.searchTerm, 25)
         this.setState({ results: data.value })
       } catch (err) {
         this.setState({ error: err.toString() })
