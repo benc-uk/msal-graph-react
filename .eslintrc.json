@@ -1,0 +1,18 @@
+{
+  "extends": ["react-app", "eslint:recommended"],
+  "env": {
+    "es6": true
+  },
+  "rules": {
+    // Errors & best practices
+    "no-var": "error",
+    "no-console": "off",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next|res|req" }],
+    "curly": "error",
+    "import/no-anonymous-default-export": "off",
+
+    // ES6
+    "arrow-spacing": "error",
+    "arrow-parens": "error"
+  }
+}
