@@ -14,23 +14,23 @@ export default class Login extends React.Component {
     super(props)
 
     this.state = {
-      error: null
+      error: null,
     }
 
     this.doLogin = this.doLogin.bind(this)
   }
 
   render() {
-    return <div className="col centered">
-      <h1 className="title is-5">Please login with Microsoft Identity Platform</h1>
-      <button className="button is-dark is-large" onClick={this.doLogin}>Sign in with Microsoft &nbsp; <img src="img/mssymbol.svg" alt="MS logo"/></button>
-      <p className="mt-4">Note. You can login with a 'work &amp; school' or personal Microsoft account</p>
-      {(this.state.error) &&
-        <div className="notification is-warning mt-4">
-          { this.state.error }
-        </div>
-      }
-    </div>
+    return (
+      <div className="col centered">
+        <h1 className="title is-5">Please login with Microsoft Identity Platform</h1>
+        <button className="button is-dark is-large" onClick={this.doLogin}>
+          Sign in with Microsoft &nbsp; <img src="img/mssymbol.svg" alt="MS logo" />
+        </button>
+        <p className="mt-4">Note. You can login with a 'work &amp; school' or personal Microsoft account</p>
+        {this.state.error && <div className="notification is-warning mt-4">{this.state.error}</div>}
+      </div>
+    )
   }
 
   async doLogin() {
